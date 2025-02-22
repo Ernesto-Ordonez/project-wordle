@@ -23,13 +23,13 @@ function Game() {
   console.info({ answer });
   const updateGuesses = (newGuess) => {
     if (gameState !== "playing") return;
-    console.log(answer, newGuess);
     const newGuesses = [
       ...guesses,
       { id: crypto.randomUUID(), guess: newGuess },
     ];
     setGuesses(newGuesses);
     if (newGuess === answer) setGameState("won");
+    if (newGuesses.length >= NUM_OF_GUESSES_ALLOWED) setGameState("lost");
   };
 
   const resetGame = () => {
@@ -37,8 +37,6 @@ function Game() {
     setGuesses([]);
     setGameState("playing");
   };
-
-  console.log(guesses);
 
   return (
     <>

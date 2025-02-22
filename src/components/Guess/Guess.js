@@ -3,22 +3,23 @@ import React from "react";
 import { range } from "../../utils";
 import { checkGuess } from "../../game-helpers";
 
-const getUniqueCells = () => {
-  return range(5).map(() => crypto.randomUUID());
-};
+function Cell({ value, status }) {
+  const className = status ? `cell ${status}` : "cell";
+
+  return <span className={className}>{value || undefined}</span>;
+}
 
 function Guess({ value, answer }) {
   const checkedValue = value && checkGuess(value, answer);
 
   return (
     <p className="guess">
-      {getUniqueCells().map((cellId, index) => (
-        <span
-          key={cellId}
-          className={`cell ${value && checkedValue[index].status}`}
-        >
-          {value && value[index]}
-        </span>
+      {range(5).map((num) => (
+        <Cell
+          key={num}
+          value={value && value[num]}
+          status={value && checkedValue[num].status}
+        />
       ))}
     </p>
   );

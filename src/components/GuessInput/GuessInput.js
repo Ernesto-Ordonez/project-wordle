@@ -49,6 +49,7 @@ function GuessInput({ updateGuesses }) {
       <input
         ref={inputRef}
         pattern="[a-zA-Z]{5}"
+        title="Only letters A to Z"
         minLength={5}
         maxLength={5}
         id="guess-input"
